@@ -1,729 +1,102 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Szczecin – Aktualności z Szczecin</title>
-    <meta name="description" content="Najnowsze aktualności, wiadomości lokalne i informacje z Szczecin. Szczecin – Twój lokalny serwis informacyjny.">
-    <meta name="keywords" content="Szczecin, wiadomości Szczecin, aktualności Szczecin, lokalny serwis informacyjny">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --primary: #0d3b6e;
-            --primary-light: #1a5276;
-            --accent: #c0392b;
-            --text: #1a1a1a;
-            --text-muted: #6c757d;
-            --bg: #f4f5f7;
-            --white: #ffffff;
-            --border: #dde1e7;
-            --card-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        a { color: inherit; text-decoration: none; }
-        a:hover { color: var(--accent); }
-        img { max-width: 100%; display: block; }
-
-        /* TOP BAR */
-        .topbar {
-            background: var(--primary);
-            color: rgba(255,255,255,0.75);
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            padding: 6px 0;
-        }
-        .topbar-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .topbar a { color: rgba(255,255,255,0.75); }
-        .topbar a:hover { color: #fff; }
-
-        /* HEADER */
-        header {
-            background: var(--white);
-            border-bottom: 3px solid var(--primary);
-            padding: 18px 0 12px;
-        }
-        .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        .logo {
-            display: flex;
-            flex-direction: column;
-        }
-        .logo-name {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-            font-family: Arial, sans-serif;
-            line-height: 1;
-        }
-        .logo-name span { color: var(--accent); }
-        .logo-tagline {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-family: Arial, sans-serif;
-            margin-top: 3px;
-            letter-spacing: 0.5px;
-        }
-        .header-date {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            color: var(--text-muted);
-            text-align: right;
-        }
-
-        /* NAV */
-        nav {
-            background: var(--primary);
-        }
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            gap: 0;
-        }
-        nav a {
-            color: rgba(255,255,255,0.9);
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            padding: 12px 18px;
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            border-right: 1px solid rgba(255,255,255,0.1);
-            transition: background 0.2s;
-        }
-        nav a:hover, nav a.active {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        /* BREAKING NEWS */
-        .breaking {
-            background: var(--accent);
-            color: #fff;
-            padding: 8px 0;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-        }
-        .breaking-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .breaking-label {
-            background: rgba(0,0,0,0.25);
-            padding: 2px 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 11px;
-            white-space: nowrap;
-            letter-spacing: 0.5px;
-        }
-        .breaking-text { overflow: hidden; }
-
-        /* MAIN LAYOUT */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px 20px;
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 28px;
-        }
-
-        /* SECTION HEADING */
-        .section-heading {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 6px;
-            margin-bottom: 18px;
-        }
-
-        /* FEATURED ARTICLE */
-        .featured {
-            background: var(--white);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 24px;
-        }
-        .featured-img {
-            width: 100%;
-            height: 380px;
-            background: linear-gradient(135deg, #1a3a5c 0%, #2e86c1 60%, #1a5276 100%);
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-        }
-        .featured-img-label {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: var(--accent);
-            color: #fff;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 10px;
-            letter-spacing: 0.5px;
-        }
-        .featured-img-overlay {
-            width: 100%;
-            padding: 28px 28px 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-        }
-        .featured-body { padding: 22px 28px 26px; }
-        .featured-category {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--accent);
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        .featured-title {
-            font-size: 26px;
-            font-weight: 900;
-            line-height: 1.25;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-        .featured-excerpt {
-            font-size: 16px;
-            color: var(--text-muted);
-            line-height: 1.65;
-            margin-bottom: 16px;
-        }
-        .featured-meta {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            gap: 16px;
-        }
-
-        /* ARTICLE GRID */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 24px;
-        }
-        .article-card {
-            background: var(--white);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
-        }
-        .article-card-img {
-            width: 100%;
-            height: 160px;
-            position: relative;
-        }
-        .article-card-img-bg {
-            width: 100%;
-            height: 100%;
-        }
-        .article-card-body { padding: 16px; flex: 1; }
-        .article-card-category {
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--accent);
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-        }
-        .article-card-title {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.35;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-        .article-card-title:hover { color: var(--accent); }
-        .article-card-meta {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: auto;
-            padding-top: 8px;
-        }
-
-        /* MORE ARTICLES */
-        .more-articles { margin-bottom: 8px; }
-        .more-article-item {
-            background: var(--white);
-            border-radius: 4px;
-            box-shadow: var(--card-shadow);
-            padding: 14px 18px;
-            margin-bottom: 10px;
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-        .more-article-num {
-            font-family: Arial, sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--border);
-            line-height: 1;
-            min-width: 32px;
-        }
-        .more-article-title {
-            font-size: 15px;
-            font-weight: 700;
-            line-height: 1.35;
-            color: var(--text);
-        }
-        .more-article-title:hover { color: var(--accent); }
-        .more-article-meta {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* SIDEBAR */
-        .sidebar {}
-        .sidebar-widget {
-            background: var(--white);
-            border-radius: 4px;
-            box-shadow: var(--card-shadow);
-            padding: 20px;
-            margin-bottom: 22px;
-        }
-        .sidebar-widget-title {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 8px;
-            margin-bottom: 16px;
-        }
-        .sidebar-news-item {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .sidebar-news-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .sidebar-news-title {
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 1.35;
-            margin-bottom: 4px;
-        }
-        .sidebar-news-title:hover { color: var(--accent); }
-        .sidebar-news-meta {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-        .sidebar-img {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, #0d3b6e, #2980b9);
-            border-radius: 4px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            color: rgba(255,255,255,0.6);
-        }
-        .about-text {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-        .weather-widget {
-            text-align: center;
-        }
-        .weather-city {
-            font-family: Arial, sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-        .weather-temp {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--primary);
-            line-height: 1;
-            font-family: Arial, sans-serif;
-        }
-        .weather-desc {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 6px;
-        }
-        .weather-icon { font-size: 36px; margin-bottom: 4px; }
-
-        /* FOOTER */
-        footer {
-            background: var(--primary);
-            color: rgba(255,255,255,0.8);
-            padding: 40px 0 20px;
-            margin-top: 20px;
-        }
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            margin-bottom: 20px;
-        }
-        .footer-logo {
-            font-family: Arial, sans-serif;
-            font-size: 22px;
-            font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        .footer-logo span { color: var(--accent); }
-        .footer-desc {
-            font-size: 13px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.65);
-        }
-        .footer-col-title {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #fff;
-            margin-bottom: 14px;
-        }
-        .footer-links { list-style: none; }
-        .footer-links li {
-            padding: 4px 0;
-            font-size: 13px;
-        }
-        .footer-links a {
-            color: rgba(255,255,255,0.65);
-        }
-        .footer-links a:hover { color: #fff; }
-        .footer-bottom {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            color: rgba(255,255,255,0.45);
-            text-align: center;
-        }
-
-        /* COLOR PALETTES FOR ARTICLE IMGS */
-        .img-blue   { background: linear-gradient(135deg, #1a3a5c 0%, #2e86c1 100%); }
-        .img-green  { background: linear-gradient(135deg, #1e6b3e 0%, #27ae60 100%); }
-        .img-purple { background: linear-gradient(135deg, #4a235a 0%, #8e44ad 100%); }
-        .img-orange { background: linear-gradient(135deg, #784212 0%, #e67e22 100%); }
-        .img-teal   { background: linear-gradient(135deg, #0e5460 0%, #1abc9c 100%); }
-        .img-red    { background: linear-gradient(135deg, #6e0d0d 0%, #c0392b 100%); }
-
-        @media (max-width: 900px) {
-            .container { grid-template-columns: 1fr; }
-            .articles-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-            nav a { padding: 10px 12px; font-size: 12px; }
-            .featured-img { height: 240px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Muzyka i koncerty - świat dźwięków i emocji</title>
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        line-height: 1.7;
+        color: #2c2c2c;
+        background: linear-gradient(to bottom, #f4f1ea, #ffffff);
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+    h1 {
+        color: #6a1b9a;
+        text-align: center;
+        border-bottom: 3px solid #6a1b9a;
+        padding-bottom: 15px;
+        font-size: 2.5em;
+    }
+    h2 {
+        color: #4a148c;
+        margin-top: 35px;
+        border-left: 5px solid #ab47bc;
+        padding-left: 15px;
+    }
+    p {
+        text-align: justify;
+        margin-bottom: 15px;
+        font-size: 1.05em;
+    }
+    .highlight {
+        background-color: #f3e5f5;
+        padding: 15px;
+        border-radius: 8px;
+        font-style: italic;
+    }
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        color: #888;
+        font-size: 0.9em;
+    }
+</style>
 </head>
 <body>
-
-<div class="topbar">
-    <div class="topbar-inner">
-        <span id="topbar-date">Poniedziałek, 23 czerwca 2025</span>
-        <span>
-            <a href="#">Kontakt</a> &nbsp;|&nbsp;
-            <a href="#">Newsletter</a> &nbsp;|&nbsp;
-            <a href="#">Reklama</a>
-        </span>
-    </div>
-</div>
-
-<header>
-    <div class="header-inner">
-        <div class="logo">
-            <a href="/">
-                <div class="logo-name">Szczecin<span></span></div>
-                <div class="logo-tagline">Lokalny serwis informacyjny &bull; Szczecin</div>
-            </a>
-        </div>
-        <div class="header-date" id="header-date">
-            Twój lokalny portal informacyjny
-        </div>
-    </div>
-</header>
-
-<nav>
-    <div class="nav-inner">
-        <a href="#" class="active">Aktualności</a>
-        <a href="#">Miasto</a>
-        <a href="#">Sport</a>
-        <a href="#">Kultura</a>
-        <a href="#">Gospodarka</a>
-        <a href="#">Społeczeństwo</a>
-        <a href="#">Kontakt</a>
-    </div>
-</nav>
-
-<div class="breaking">
-    <div class="breaking-inner">
-        <span class="breaking-label">Pilne</span>
-        <span class="breaking-text">Burmistrz Szczecin ogłasza nowe inwestycje w infrastrukturę miejską &nbsp;•&nbsp; Wyniki wyborów do Rady Miejskiej &nbsp;•&nbsp; Nowy rok szkolny – zmiany w organizacji ruchu przy szkołach</span>
-    </div>
-</div>
-
 <div class="container">
-    <!-- MAIN CONTENT -->
-    <main>
-        <div class="section-heading">Najważniejsze</div>
+    <h1>Muzyka i koncerty - świat dźwięków i emocji</h1>
+<p><a href="https://gazetatorun.pl">gazetatorun.pl</a></p>
 
-        <article class="featured">
-            <div class="featured-img img-blue">
-                <div class="featured-img-label">Wyróżnione</div>
-                <div class="featured-img-overlay"></div>
-            </div>
-            <div class="featured-body">
-                <div class="featured-category">Miasto &bull; Aktualności</div>
-                <h1 class="featured-title"><a href="#">Wielka modernizacja centrum Szczecin – znamy szczegóły nowego projektu rewitalizacji</a></h1>
-                <p class="featured-excerpt">Władze miasta przedstawiły ambitny plan przebudowy ścisłego centrum. Projekt obejmuje remont chodników, nowe nasadzenia zieleni, modernizację oświetlenia oraz budowę stref rekreacyjnych. Prace mają ruszyć wiosną przyszłego roku i potrwać do końca 2026.</p>
-                <div class="featured-meta">
-                    <span>23 czerwca 2025</span>
-                    <span>Redakcja Szczecin</span>
-                    <span>5 min czytania</span>
-                </div>
-            </div>
-        </article>
+    <p class="highlight">Muzyka jest uniwersalnym językiem ludzkości, który potrafi przekroczyć granice kultur, wieków i geografii. Od pradawnych rytmów wybijanych na skórzanych bębnach po współczesne kompozycje elektroniczne, dźwięki towarzyszą człowiekowi we wszystkich najważniejszych momentach życia. Koncerty natomiast stanowią wyjątkową formę doświadczania muzyki na żywo, oferując słuchaczom niepowtarzalne przeżycia estetyczne i emocjonalne.</p>
+<p><a href="https://dladomuiogroduporadnik.pl">dladomuiogroduporadnik.pl</a></p>
 
-        <div class="section-heading">Wiadomości lokalne</div>
+    <h2>Historia muzyki i jej ewolucja na przestrzeni wieków</h2>
+<p><a href="https://raciborz.warszawainfo.workers.dev">raciborz.warszawainfo.workers.dev</a></p>
+    <p>Historia muzyki sięga zarania cywilizacji ludzkiej. Najstarsze znane instrumenty muzyczne, takie jak flety wykonane z kości ptaków, pochodzą sprzed ponad czterdziestu tysięcy lat. Już starożytni Grecy uważali muzykę za jedną z najważniejszych sztuk, a Pitagoras jako pierwszy zauważył matematyczne prawidłowości rządzące harmonią dźwięków. Średniowiecze przyniosło rozwój muzyki sakralnej, z chorałem gregoriańskim jako jej najznamienitszym przykładem, natomiast renesans otworzył drogę do polifonii i wielogłosowości.</p>
+<p><a href="https://rodzicielskasfera.pl">rodzicielskasfera.pl</a></p>
+    
+    <p>Barok, z takimi mistrzami jak Jan Sebastian Bach, Antonio Vivaldi czy Georg Friedrich Händel, ukształtował podstawy nowoczesnej harmonii oraz form muzycznych. Klasycyzm, symbolizowany przez Mozarta, Haydna i wczesnego Beethovena, wprowadził czystość formalną i emocjonalną równowagę. Romantyzm dziewiętnastowieczny to wybuch indywidualizmu w muzyce - Chopin, Liszt, Wagner czy Czajkowski tworzyli dzieła pełne pasji, tęsknoty i głębokich uczuć. Wiek dwudziesty przyniósł prawdziwą rewolucję: od atonalności Schönberga, przez jazz i blues, po rock, pop i muzykę elektroniczną, która dziś dominuje w mainstreamie.</p>
 
-        <div class="articles-grid">
-            <article class="article-card">
-                <div class="article-card-img">
-                    <div class="article-card-img-bg img-green" style="height:160px;"></div>
-                </div>
-                <div class="article-card-body">
-                    <div class="article-card-category">Sport</div>
-                    <h2 class="article-card-title"><a href="#">Lokalna drużyna awansuje do wyższej ligi – mieszkańcy świętują sukces</a></h2>
-                    <div class="article-card-meta">22 czerwca 2025 &bull; Sport</div>
-                </div>
-            </article>
+    <p>Współczesna muzyka jest niezwykle różnorodna i eklektyczna. Artyści coraz częściej łączą elementy różnych gatunków, tworząc hybrydy stylistyczne, które trudno jednoznacznie zaklasyfikować. Rozwój technologii cyfrowej sprawił, że produkcja muzyki stała się dostępna dla każdego, kto posiada komputer i odrobinę talentu, co zdemokratyzowało cały przemysł muzyczny.</p>
 
-            <article class="article-card">
-                <div class="article-card-img">
-                    <div class="article-card-img-bg img-purple" style="height:160px;"></div>
-                </div>
-                <div class="article-card-body">
-                    <div class="article-card-category">Kultura</div>
-                    <h2 class="article-card-title"><a href="#">Festiwal Kulturalny Szczecin 2025 – program i bilety już dostępne</a></h2>
-                    <div class="article-card-meta">21 czerwca 2025 &bull; Kultura</div>
-                </div>
-            </article>
+    <h2>Rodzaje koncertów i ich charakterystyka</h2>
+    <p>Świat koncertów jest niezwykle bogaty i różnorodny. Możemy wyróżnić kilka głównych typów wydarzeń muzycznych, z których każdy oferuje odmienne doświadczenia. Koncerty klasyczne odbywają się zazwyczaj w filharmoniach i salach koncertowych o doskonałej akustyce. Wymagają od publiczności skupienia, ciszy i pewnej znajomości repertuaru. Występy orkiestr symfonicznych, recitali fortepianowych czy kwartetów smyczkowych to prawdziwa uczta dla melomanów.</p>
+<p><a href="https://pieknamama.pl">pieknamama.pl</a></p>
 
-            <article class="article-card">
-                <div class="article-card-img">
-                    <div class="article-card-img-bg img-orange" style="height:160px;"></div>
-                </div>
-                <div class="article-card-body">
-                    <div class="article-card-category">Gospodarka</div>
-                    <h2 class="article-card-title"><a href="#">Nowe miejsca pracy w Szczecin – duży inwestor wchodzi na rynek lokalny</a></h2>
-                    <div class="article-card-meta">20 czerwca 2025 &bull; Gospodarka</div>
-                </div>
-            </article>
+    <p>Zupełnie inną atmosferę mają koncerty rockowe i popowe. Odbywają się często w wielkich halach, na stadionach lub pod gołym niebem podczas festiwali. Charakteryzują się energetyczną atmosferą, głośnym nagłośnieniem, efektami świetlnymi i pirotechnicznymi oraz aktywnym udziałem publiczności, która śpiewa razem z artystami, tańczy i skacze. Koncerty jazzowe z kolei mają zwykle bardziej kameralny charakter - odbywają się w klubach, gdzie słuchacze siedzą przy stolikach, sącząc drinki i delektując się improwizacjami muzyków.</p>
 
-            <article class="article-card">
-                <div class="article-card-img">
-                    <div class="article-card-img-bg img-teal" style="height:160px;"></div>
-                </div>
-                <div class="article-card-body">
-                    <div class="article-card-category">Społeczeństwo</div>
-                    <h2 class="article-card-title"><a href="#">Nowe ścieżki rowerowe w Szczecin – kiedy otwarcie i gdzie przebiegają?</a></h2>
-                    <div class="article-card-meta">19 czerwca 2025 &bull; Społeczeństwo</div>
-                </div>
-            </article>
-        </div>
+    <p>Festiwale muzyczne to osobna kategoria wydarzeń, która w ostatnich latach zyskała ogromną popularność. Open'er Festival w Gdyni, Pol'and'Rock Festival w Kostrzynie nad Odrą, Orange Warsaw Festival czy Męskie Granie to wydarzenia, które przyciągają dziesiątki, a czasem setki tysięcy fanów. Festiwale oferują nie tylko muzykę wielu artystów na kilku scenach jednocześnie, ale także całą infrastrukturę - pola namiotowe, punkty gastronomiczne, strefy relaksu i różnorodne atrakcje.</p>
 
-        <div class="section-heading">Więcej wiadomości</div>
+    <h2>Znaczenie koncertów w życiu artystów i publiczności</h2>
+<p><a href="https://nvsk.lv">nvsk.lv</a></p>
+    <p>Dla wielu muzyków występy na żywo stanowią kwintesencję ich działalności artystycznej. To właśnie na scenie mogą w pełni wyrazić swoją osobowość, nawiązać bezpośredni kontakt z publicznością i doświadczyć niepowtarzalnej energii, jaka rodzi się w interakcji z tłumem. Wielu artystów przyznaje, że żadne studyjne nagranie nie jest w stanie oddać magii koncertu na żywo. Improwizacje, spontaniczne aranżacje i emocje chwili sprawiają, że każdy występ jest wyjątkowy i niepowtarzalny.</p>
 
-        <div class="more-articles">
-            <div class="more-article-item">
-                <div class="more-article-num">1</div>
-                <div>
-                    <div class="more-article-title"><a href="#">Przebudowa ul. Głównej w Szczecin – utrudnienia w ruchu przez kolejne tygodnie</a></div>
-                    <div class="more-article-meta">23 czerwca 2025 &bull; Miasto</div>
-                </div>
-            </div>
-            <div class="more-article-item">
-                <div class="more-article-num">2</div>
-                <div>
-                    <div class="more-article-title"><a href="#">Szkoły w Szczecin podsumowują rok szkolny 2024/2025 – wyniki i statystyki</a></div>
-                    <div class="more-article-meta">22 czerwca 2025 &bull; Edukacja</div>
-                </div>
-            </div>
-            <div class="more-article-item">
-                <div class="more-article-num">3</div>
-                <div>
-                    <div class="more-article-title"><a href="#">Jarmark Letni na Rynku – tłumy mieszkańców na corocznej imprezie</a></div>
-                    <div class="more-article-meta">21 czerwca 2025 &bull; Kultura</div>
-                </div>
-            </div>
-            <div class="more-article-item">
-                <div class="more-article-num">4</div>
-                <div>
-                    <div class="more-article-title"><a href="#">Zmiany w rozkładzie jazdy autobusów miejskich od 1 lipca 2025</a></div>
-                    <div class="more-article-meta">20 czerwca 2025 &bull; Komunikacja</div>
-                </div>
-            </div>
-            <div class="more-article-item">
-                <div class="more-article-num">5</div>
-                <div>
-                    <div class="more-article-title"><a href="#">Nowe oblicze Parku Miejskiego – zakończono remont i otwarcie dla zwiedzających</a></div>
-                    <div class="more-article-meta">18 czerwca 2025 &bull; Miasto</div>
-                </div>
-            </div>
-        </div>
-    </main>
+    <p>Dla publiczności koncerty to nie tylko rozrywka, ale często głębokie przeżycie duchowe i emocjonalne. Wspólne przeżywanie muzyki w otoczeniu tysięcy innych ludzi tworzy poczucie wspólnoty i przynależności. Neurobiolodzy udowodnili, że słuchanie muzyki na żywo powoduje wydzielanie endorfin i oksytocyny - hormonów szczęścia i więzi społecznej. Wielu ludzi wspomina koncerty jako jedne z najważniejszych momentów swojego życia.</p>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-widget">
-            <div class="sidebar-widget-title">Popularne dziś</div>
-            <div class="sidebar-news-item">
-                <div class="sidebar-news-title"><a href="#">Wyniki matur 2025 – jak wypadli uczniowie z Szczecin?</a></div>
-                <div class="sidebar-news-meta">23 czerwca 2025</div>
-            </div>
-            <div class="sidebar-news-item">
-                <div class="sidebar-news-title"><a href="#">Targi pracy w Szczecin – setki ofert dla bezrobotnych</a></div>
-                <div class="sidebar-news-meta">22 czerwca 2025</div>
-            </div>
-            <div class="sidebar-news-item">
-                <div class="sidebar-news-title"><a href="#">Nowe połączenie kolejowe z Szczecin do Warszawy</a></div>
-                <div class="sidebar-news-meta">21 czerwca 2025</div>
-            </div>
-            <div class="sidebar-news-item">
-                <div class="sidebar-news-title"><a href="#">Pożar w centrum – straż pożarna szybko opanowała ogień</a></div>
-                <div class="sidebar-news-meta">20 czerwca 2025</div>
-            </div>
-        </div>
+    <p>Nie można również zapomnieć o ekonomicznym znaczeniu koncertów. Przemysł muzyczny generuje miliardowe przychody, tworzy tysiące miejsc pracy - od muzyków i realizatorów dźwięku, przez techników, ochroniarzy, sprzedawców, po pracowników cateringu. Duże koncerty i festiwale przyciągają turystów, przyczyniając się do rozwoju lokalnej gospodarki i promocji miast.</p>
 
-        <div class="sidebar-widget weather-widget">
-            <div class="sidebar-widget-title">Pogoda w Szczecin</div>
-            <div class="weather-icon">⛅</div>
-            <div class="weather-city">Szczecin</div>
-            <div class="weather-temp">21°C</div>
-            <div class="weather-desc">Częściowe zachmurzenie &bull; Poniedziałek</div>
-        </div>
+    <h2>Jak przygotować się do udziału w koncercie</h2>
+<p><a href="https://krakowinfo24.github.io/jaworzno.github.io/">krakowinfo24.github.io/jaworzno.github.io/</a></p>
+    <p>Aby w pełni cieszyć się koncertem, warto się do niego odpowiednio przygotować. Przede wszystkim należy zadbać o zakup biletów z wyprzedzeniem, gdyż popularne wydarzenia często wyprzedawane są w ciągu kilku godzin od rozpoczęcia sprzedaży. Warto korzystać wyłącznie z oficjalnych źródeł, aby uniknąć oszustw i fałszywych biletów. Przed koncertem dobrze jest zapoznać się z repertuarem artysty - poznanie tekstów i melodii sprawi, że wspólne śpiewanie będzie o wiele przyjemniejsze.</p>
 
-        <div class="sidebar-widget">
-            <div class="sidebar-widget-title">O nas</div>
-            <div class="sidebar-img">Szczecin</div>
-            <p class="about-text">Szczecin to niezależny lokalny serwis informacyjny poświęcony wiadomościom z Szczecin i regionu. Dostarczamy rzetelne informacje dla mieszkańców od 2020 roku.</p>
-        </div>
+    <p>Kwestia stroju również ma znaczenie. Na koncerty rockowe i festiwale najlepiej ubrać się wygodnie, w rzeczy, które nie żal ubrudzić. Na koncerty klasyczne obowiązuje strój elegancki - garnitur lub sukienka to standard. Warto pamiętać o wygodnych butach, szczególnie gdy będziemy stać przez kilka godzin. Na letnie festiwale niezbędne są kremy z filtrem, nakrycie głowy i butelka wody.</p>
 
-        <div class="sidebar-widget">
-            <div class="sidebar-widget-title">Kontakt</div>
-            <div style="font-size:13px; color: var(--text-muted); line-height:2;">
-                <div>📧 redakcja@szczecin.github.io</div>
-                <div>📞 +48 34 XXX XX XX</div>
-                <div>📍 Szczecin, ul. Redakcyjna 1</div>
-            </div>
-        </div>
-    </aside>
+    <p>Etykieta koncertowa to również ważny aspekt. Podczas występów klasycznych nie oklaskujemy między częściami utworu, nie rozmawiamy i wyłączamy telefony. Na koncertach rozrywkowych panują luźniejsze zasady, ale wciąż warto szanować innych uczestników - nie przepychamy się bez potrzeby, nie zasłaniamy widoku wyższym osobom trzymając telefon nad głową i nie robimy hałasu podczas cichszych partii występu.</p>
+<p><a href="https://dziennikszczecin.pl">dziennikszczecin.pl</a></p>
+
+    <footer>
+        <p>Muzyka jest lekarstwem duszy i mostem łączącym ludzi na całym świecie.</p>
+    </footer>
 </div>
-
-<footer>
-    <div class="footer-inner">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-logo">Szczecin<span></span></div>
-                <p class="footer-desc">Lokalny serwis informacyjny Szczecin. Najnowsze wiadomości, aktualności lokalne, sport, kultura i gospodarka. Bądź na bieżąco z tym, co dzieje się w Twoim mieście.</p>
-            </div>
-            <div>
-                <div class="footer-col-title">Działy</div>
-                <ul class="footer-links">
-                    <li><a href="#">Aktualności</a></li>
-                    <li><a href="#">Miasto</a></li>
-                    <li><a href="#">Sport</a></li>
-                    <li><a href="#">Kultura</a></li>
-                    <li><a href="#">Gospodarka</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">Informacje</div>
-                <ul class="footer-links">
-                    <li><a href="#">O redakcji</a></li>
-                    <li><a href="#">Kontakt</a></li>
-                    <li><a href="#">Reklama</a></li>
-                    <li><a href="#">Polityka prywatności</a></li>
-                    <li><a href="#">Regulamin</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; <span id="footer-year">2025</span> Szczecin. Wszelkie prawa zastrzeżone.
-        </div>
-    </div>
-</footer>
-
-<script>
-    const now = new Date();
-    const days = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'];
-    const months = ['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
-    document.getElementById('topbar-date').textContent =
-        days[now.getDay()] + ', ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
-    document.getElementById('footer-year').textContent = now.getFullYear();
-</script>
-
 </body>
 </html>
